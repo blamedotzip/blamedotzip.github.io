@@ -1,0 +1,27 @@
+/* Adapted from https://github.com/programmercloud/rotating-text/ */
+
+.rotating-text {
+    transform: translateX(-80px);
+}
+
+.word {
+    transform-origin: center center 25px;
+
+    text-decoration: none;
+
+    position: absolute;
+    display: inline-flex;
+    opacity: 0;
+}
+
+.word.out {
+    transform: rotateX(90deg);
+    transition: 0.32s cubic-bezier(0.6, 0, 0.7, 0.2);
+}
+.word.in {
+    transition: 0.38s ease;
+    opacity: 1;
+}
+.word.behind {
+    transform: rotateX(-90deg);
+}

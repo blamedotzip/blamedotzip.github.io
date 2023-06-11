@@ -1,0 +1,45 @@
+body {
+    line-height: 1.6;
+    font-size: 42px;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    overflow: hidden;
+
+    color: #D0D0D0;
+    background: #454545;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    text-align: center;
+}
+
+.centered {
+    align-items: center;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.inline-flex {
+    display: inline-flex;
+}
+
+.discord-yellow {
+    color: #eec317;
+}
+
+.discord-blue {
+    color: #3498db;
+}
+
+.sci-yellow {
+    color: #d9d916;
+}
