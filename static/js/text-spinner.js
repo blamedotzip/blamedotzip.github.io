@@ -1,27 +1,45 @@
 /* Adapted from https://github.com/programmercloud/rotating-text/ */
 
-let words = document.querySelectorAll(".word")
+window.addEventListener("DOMContentLoaded", () => {
 
-let currentWordIndex = 0;
-let maxWordIndex = words.length - 1;
+    let modifyClassList = (element, add, ...remove) => {
+        element.classList.remove(...remove)
+        element.classList.add(add)
+    }
 
-let rotateText = () => {
-    let currentWord = words[currentWordIndex];
-    let nextWord = currentWordIndex === maxWordIndex ? words[0] : words[currentWordIndex + 1];
+    let collections = document.querySelectorAll(".words")
+    collections.forEach((collection) => {
+        let words = collection.querySelectorAll(".word")
+        if (words.length < 2) return;
 
-    // rotate out current word
-    currentWord.classList.remove("behind", "in")
-    currentWord.classList.add("out")
+        let currentWordIndex = 0;
+        let maxWordIndex = words.length - 1;
 
-    // reveal and rotate next word
-    nextWord.classList.remove("in", "out")
-    nextWord.classList.add("behind")
-    setTimeout(() => {
-        nextWord.classList.remove("behind", "out")
-        nextWord.classList.add("in")
-    }, 340)
+        words.forEach(it => it.classList.add("out"))
+        modifyClassList(words[0], "in", "out")
 
-    currentWordIndex = currentWordIndex === maxWordIndex ? 0 : currentWordIndex + 1;
-}
+        let rotateText = () => {
+            let currentWord = words[currentWordIndex];
+            let nextWord = currentWordIndex === maxWordIndex ? words[0] : words[currentWordIndex + 1];
 
-setInterval(rotateText, 4000);
+            // rotate out current word
+            modifyClassList(currentWord, "out", "behind", "in")
+
+            // reveal and rotate next word
+            modifyClassList(nextWord, "behind", "in", "out")
+            setTimeout(() => {
+                modifyClassList(nextWord, "in", "behind", "out")
+            }, 340)
+
+            currentWordIndex = currentWordIndex === maxWordIndex ? 0 : currentWordIndex + 1;
+        }
+
+        // Initial Rotation at 1s
+        setTimeout(() => {
+            rotateText()
+
+            // Then repeat after 4s
+            setInterval(rotateText, 4000);
+        }, 1000);
+    })
+})
